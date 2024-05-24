@@ -1,12 +1,9 @@
-h1{
-    color: blueviolet;
-}
-
 :root {
     --box-sixe: 150px;
     --system-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     font-family: var(--system-font);
 }
+
 
 body {
     height: 100vh;
@@ -16,6 +13,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+h1 {
+    margin-bottom: 20px;
 }
 
 .grid-container {
@@ -30,16 +31,13 @@ body {
     justify-items: center;
     align-items: center;
     border-radius: 10px;
-    width: var(--box-sixe);
-    height: var(--box-sixe);
+    
     background-color: #c8cddd;
     color: #6f748a;;
     font-size: 3rem;
     font-weight: 700;
 
-    -webkit-user-select: none; 
-    -ms-user-select: none;
-    user-select: none;
+    
 }
 
 .grid-container div:hover {
@@ -48,6 +46,21 @@ body {
 
 .grid-container div:active {
     background-color: #c8cddd;;
+}
+.cell {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #000;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
 }
 
 .scores {

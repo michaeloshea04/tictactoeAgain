@@ -29,14 +29,14 @@ function player(name) {
 const gameboard = createGameboard(); //initialise gameboard
 const playerX = player("X");
 const playerO = player("O");
+let currentPlayer = playerX; // Start with player X
+let movesLeft = 9; // Total number of available moves
 
 
 //Factory function for game flow
 function game() {
-    let currentPlayer = playerX; // Start with player X
-        let movesLeft = 9; // Total number of available moves
-    
-        // Function to check for a win
+        
+        // Function to check for a win  *stays the same*
         const checkWin = () => {
             const winningConditions = [
                 [0, 1, 2],
@@ -57,13 +57,20 @@ function game() {
             return false;
         };
     
-        // Function to display the current game board
+        // Function to display the current game board in the terminal
         const displayBoard = () => {
             console.log("Current game board:");
             console.log(gameboard.slice(0, 3).join(" | "));
             console.log(gameboard.slice(3, 6).join(" | "));
             console.log(gameboard.slice(6, 9).join(" | "));
         };
+
+        // Function to display the current game board in the browswer
+        function displayBoardUI() {
+            gameboard.forEach((cell, index) => {
+                document.querySelector(`.cell[data-index='${index}']`).textContent = typeof cell === 'number' ? '' : cell;
+            });
+        }
     
         // Function to handle each move asynchronously
     const handleMove = () => {
