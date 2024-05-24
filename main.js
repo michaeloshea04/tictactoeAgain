@@ -99,7 +99,10 @@ function game() {
     handleMove();
     }
 
-    // Call the game function to start the game
-    game();
+// Call the game function to start the game
+game();
 
-
+//Write a function that will render the contents of the gameboard array to the webpage
+function displayLogic (){
+    //write stuff
+}
