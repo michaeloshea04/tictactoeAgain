@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const gameboard = createGameboard();
+    let gameboard = createGameboard();
     const playerX = player("X");
+    let playerXScore = 0;
+    let playerOScore = 0;
     const playerO = player("O");
     let currentPlayer = playerX;
     let movesLeft = 9;
@@ -8,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function createGameboard() {
         return [0, 1, 2, 3, 4, 5, 6, 7, 8];
     }
-
-    //stays the same
+    
     function player(name) {
         const makeMove = (board, position) => {
             if (board[position] >= 0) {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return { name, makeMove };
     }
 
-    //stays the same
+    
     function checkWin() {
         const winningConditions = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -37,22 +38,32 @@ document.addEventListener("DOMContentLoaded", () => {
         return false;
     }
 
-    //NEEDS UPDATING
+    
     function displayBoard() {
         gameboard.forEach((cell, index) => {
             document.querySelector(`.cell[data-index='${index}']`).textContent = typeof cell === 'number' ? '' : cell;
         });
     }
 
-    //NEEDS UPDATING
+    
     function handleMove(event) {
         const index = event.target.getAttribute("data-index");
         if (currentPlayer.makeMove(gameboard, index)) {
             if (checkWin()) {
                 displayBoard();
                 document.getElementById("message").textContent = `${currentPlayer.name} wins!`;
+                
+                //Not sure if this is correct way to count scores
+                if(currentPlayer === playerX) {
+                    ++playerXScore;
+                }
+                else{
+                    ++playerOScore;
+                }
                 document.querySelectorAll('.cell').forEach(cell => cell.removeEventListener('click', handleMove));
                 return;
+
+                
             }
             movesLeft--;
             if (movesLeft === 0) {
@@ -64,10 +75,25 @@ document.addEventListener("DOMContentLoaded", () => {
             displayBoard();
         } else {
             document.getElementById("message").textContent = "Cell already occupied. Try another move.";
-        }
+        }        
+
+    }
+
+    function resetGame() {
+        gameboard = createGameboard();
+        currentPlayer = playerX;
+        movesLeft = 9;
+        document.getElementById("message").textContent = "";
+        displayBoard();
+        document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleMove));
     }
 
     document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleMove));
     displayBoard();
+
+    //Can't get this score to work
+    document.getElementById("scoreBoard").innerHTML = playerXScore, playerOScore;
+
+    document.getElementById("reset").addEventListener("click", resetGame);
 });
 

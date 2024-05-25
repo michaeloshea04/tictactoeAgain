@@ -69,10 +69,19 @@ h1 {
     font-weight: 600;
     background-color: #acb3c9;
     border-radius: 10px;
+    
+    border-color: #000;
     color: #fff;
     margin-top: 40px;
 }
 
 .noclick {
     pointer-events:none;
+}
+
+.playerNameInput {
+    margin: 20px;
+    padding: 20px;
+    border: black, 2px, solid;
+    border-radius: 5rem;
 }
